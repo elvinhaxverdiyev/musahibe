@@ -6,7 +6,9 @@ from io import BytesIO
 from django.http import HttpResponse
 from django.conf import settings
 import os
-from django.urls import reverse
+
+# AWS public IP və ya domain
+AWS_PUBLIC_HOST = "http://16.170.243.177:8000"
 
 # Məhsul əlavə etmək və QR yaratmaq
 def create_product(request):
@@ -15,9 +17,8 @@ def create_product(request):
         if form.is_valid():
             product = form.save()
 
-            # QR scan ediləndə /01/<gtin>/ açılacaq
-            url = request.build_absolute_uri(f"/01/{product.gtin}/")
-
+            # QR URL-i: sadəcə /01/<gtin>/ və AWS public IP ilə
+            url = f"{AWS_PUBLIC_HOST}/01/{product.gtin}/"
 
             # QR kod şəkli yarat
             qr = qrcode.make(url)
@@ -33,20 +34,18 @@ def create_product(request):
 
     return render(request, "product_form.html", {"form": form})
 
+
 # Telefon scan edəndə açılacaq HTML səhifə
 def product_detail(request, gtin):
     product = get_object_or_404(Product, gtin=gtin)
     return render(request, "product_detail.html", {"product": product})
 
+
 # QR kodu browserdə görmək üçün (optional)
 def create_qr(request, gtin):
-    # Burada da /01/<gtin>/ URL-i yaradılır
-    url = request.build_absolute_uri(f"/01/{gtin}/")
-
-
+    url = f"{AWS_PUBLIC_HOST}/01/{gtin}/"
     img = qrcode.make(url)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
     buffer.seek(0)
-
     return HttpResponse(buffer.getvalue(), content_type="image/png")
