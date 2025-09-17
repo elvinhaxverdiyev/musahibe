@@ -16,7 +16,8 @@ def create_product(request):
             product = form.save()
 
             # QR scan ediləndə /01/<gtin>/ açılacaq
-            url = request.build_absolute_uri(reverse("product-detail", args=[product.gtin]))
+            url = request.build_absolute_uri(f"/01/{product.gtin}/")
+
 
             # QR kod şəkli yarat
             qr = qrcode.make(url)
@@ -40,7 +41,8 @@ def product_detail(request, gtin):
 # QR kodu browserdə görmək üçün (optional)
 def create_qr(request, gtin):
     # Burada da /01/<gtin>/ URL-i yaradılır
-    url = request.build_absolute_uri(reverse("product-detail", args=[gtin]))
+    url = request.build_absolute_uri(f"/01/{gtin}/")
+
 
     img = qrcode.make(url)
     buffer = BytesIO()
