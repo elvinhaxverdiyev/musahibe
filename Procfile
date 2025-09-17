@@ -1,1 +1,1 @@
-web: gunicorn qrproject.wsgi
+web: gunicorn qrproject.wsgi:application
