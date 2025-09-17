@@ -6,6 +6,7 @@ from io import BytesIO
 from django.http import HttpResponse
 from django.conf import settings
 import os
+from django.urls import reverse
 
 # Məhsul əlavə etmək və QR yaratmaq
 def create_product(request):
@@ -15,8 +16,8 @@ def create_product(request):
             product = form.save()
 
             # Dinamik URL: HTML səhifəyə yönləndirir
-            host = request.get_host()
-            url = f"http://{host}/product/{product.gtin}/"
+            # Burada QR scan ediləndə /01/<gtin>/ açılacaq
+            url = request.build_absolute_uri(reverse("product-detail", args=[product.gtin]))
 
             # QR kod şəkli yarat
             qr = qrcode.make(url)
@@ -39,8 +40,8 @@ def product_detail(request, gtin):
 
 # QR kodu browserdə görmək üçün (optional)
 def create_qr(request, gtin):
-    host = request.get_host()
-    url = f"http://{host}/product/{gtin}/"
+    # Burada da /01/<gtin>/ URL-i yaradılır
+    url = request.build_absolute_uri(reverse("product-detail", args=[gtin]))
 
     img = qrcode.make(url)
     buffer = BytesIO()
