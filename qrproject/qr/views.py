@@ -15,8 +15,7 @@ def create_product(request):
         if form.is_valid():
             product = form.save()
 
-            # Dinamik URL: HTML səhifəyə yönləndirir
-            # Burada QR scan ediləndə /01/<gtin>/ açılacaq
+            # QR scan ediləndə /01/<gtin>/ açılacaq
             url = request.build_absolute_uri(reverse("product-detail", args=[product.gtin]))
 
             # QR kod şəkli yarat
