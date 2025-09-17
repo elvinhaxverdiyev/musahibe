@@ -9,6 +9,8 @@ class Product(models.Model):
     producer = models.CharField(max_length=255)
     description = models.TextField()
     ingredients = models.TextField()
+    image = models.ImageField(upload_to='media/', blank=True, null=True)  # Yeni sahə
+
 
     def __str__(self):
         return f"{self.name} ({self.gtin})"

@@ -1,4 +1,10 @@
 <h2>{{ product.name }}</h2>
+
+<!-- Məhsul şəkili -->
+{% if product.image %}
+  <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width:300px;">
+{% endif %}
+
 <ul>
   <li>GTIN: {{ product.gtin }}</li>
   <li>İl: {{ product.year }}</li>
