@@ -1,6 +1,70 @@
-<h2>Məhsul əlavə et</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Yarat</button>
-</form>
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<title>Məhsul əlavə et</title>
+<style>
+  /* Səhifə fonu */
+  body {
+    background: linear-gradient(to bottom, #fff7e6, #fff2cc); /* ağ-sarı tonlar */
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Form konteyneri */
+  .form-container {
+    background-color: #fff9e6; /* daha açıq sarı fon */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px; /* form genişliyi */
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    color: #ffb700; /* sarı ton başlıq */
+  }
+
+  /* Form elementləri */
+  form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ffd966;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #ffb700;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #e6a500;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Məhsul əlavə et</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Yarat</button>
+  </form>
+</div>
+
+</body>
+</html>
