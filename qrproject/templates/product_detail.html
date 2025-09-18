@@ -18,7 +18,7 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    max-width: 500px;
+    max-width: 600px;
     width: 100%;
     text-align: center;
   }
@@ -28,28 +28,40 @@
     margin-bottom: 20px;
   }
 
-  img {
+  /* Məhsul şəkli */
+  .product-image {
     display: block;
-    margin: 0 auto 20px; /* şəkli ortala */
+    margin: 0 auto 20px;
     max-width: 250px;
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-    text-align: left; /* list datalarını sola yasla */
+  /* Məhsul məlumatları */
+  .product-info {
+    text-align: left;
+    margin-bottom: 30px;
   }
 
-  ul li {
+  .product-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .product-info ul li {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .product-info p {
     margin-bottom: 10px;
     font-size: 16px;
   }
 
-  p {
-    text-align: left;
-    margin-bottom: 15px;
-    font-size: 16px;
+  /* Barkod */
+  .barcode {
+    display: block;
+    margin: 0 auto;
+    max-width: 250px;
   }
 
   hr {
@@ -65,23 +77,25 @@
   <h2>{{ product.name }}</h2>
 
   {% if product.image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
   {% endif %}
+
+  <div class="product-info">
+    <ul>
+      <li><strong>GTIN:</strong> {{ product.gtin }}</li>
+      <li><strong>İl:</strong> {{ product.year }}</li>
+      <li><strong>Növ:</strong> {{ product.product_type }}</li>
+      <li><strong>Həcm:</strong> {{ product.volume }}</li>
+      <li><strong>İstehsalçı:</strong> {{ product.producer }}</li>
+    </ul>
+
+    <p><strong>Təsvir:</strong> {{ product.description }}</p>
+    <p><strong>Tərkibi:</strong> {{ product.ingredients }}</p>
+  </div>
 
   <hr>
 
-  <img src="{{ barcode_url }}" alt="Barkod">
-
-  <ul>
-    <li><strong>GTIN:</strong> {{ product.gtin }}</li>
-    <li><strong>İl:</strong> {{ product.year }}</li>
-    <li><strong>Növ:</strong> {{ product.product_type }}</li>
-    <li><strong>Həcm:</strong> {{ product.volume }}</li>
-    <li><strong>İstehsalçı:</strong> {{ product.producer }}</li>
-  </ul>
-
-  <p><strong>Təsvir:</strong> {{ product.description }}</p>
-  <p><strong>Tərkibi:</strong> {{ product.ingredients }}</p>
+  <img src="{{ barcode_url }}" alt="Barkod" class="barcode">
 </div>
 
 </body>
