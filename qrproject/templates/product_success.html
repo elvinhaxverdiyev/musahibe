@@ -1,4 +1,54 @@
-<h2>{{ product.name }} uğurla əlavə olundu!</h2>
-<p>GTIN: {{ product.gtin }}</p>
-<img src="{{ qr_url }}" alt="QR Code">
-<p>Bu QR kodu scan et, məhsul məlumatını gör.</p>
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<title>Məhsul uğurla əlavə olundu</title>
+<style>
+  body {
+    background: linear-gradient(to bottom, #fff7e6, #fff2cc); /* ağ-sarı tonlar */
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .success-container {
+    background-color: #fff9e6; /* açıq sarı fon */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  h2 {
+    color: #ffb700; /* sarı ton başlıq */
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto 20px; /* tam ortada göstərmək üçün */
+    width: 200px; /* QR ölçüsü */
+    height: 200px;
+  }
+</style>
+</head>
+<body>
+
+<div class="success-container">
+  <h2>{{ product.name }} uğurla əlavə olundu!</h2>
+  <p>GTIN: {{ product.gtin }}</p>
+  <img src="{{ qr_url }}" alt="QR Code">
+  <p>Bu QR kodu scan et, məhsul məlumatını gör.</p>
+</div>
+
+</body>
+</html>
