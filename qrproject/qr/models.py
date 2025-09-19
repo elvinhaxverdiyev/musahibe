@@ -1,9 +1,17 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 class Product(models.Model):
-    gtin = models.CharField(max_length=14, unique=True) 
+    gtin = models.CharField(
+    max_length=14,
+    unique=True,
+    validators=[
+        RegexValidator(r'^\d{8,14}$', 'GTIN yalnız 14 rəqəm  ola biler.')
+    ]
+    )
+    
     name = models.CharField(max_length=255)
-    year = models.CharField(max_length=10, blank=True, null=True)
+    year = models.IntegerField(max_length=10, blank=True, null=True)
     product_type = models.CharField(max_length=50)
     volume = models.CharField(max_length=50)
     producer = models.CharField(max_length=255)
