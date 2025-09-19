@@ -1,1 +1,6 @@
 /qrproject/staticfiles/
+*.pyc
+__pycache__/
+*.sqlite3
+*.png
+/media/
