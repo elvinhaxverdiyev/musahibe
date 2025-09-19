@@ -11,7 +11,7 @@ class Product(models.Model):
     )
     
     name = models.CharField(max_length=255)
-    year = models.IntegerField(max_length=10, blank=True, null=True)
+    year = models.IntegerField(blank=True, null=True)
     product_type = models.CharField(max_length=50)
     volume = models.CharField(max_length=50)
     producer = models.CharField(max_length=255)
